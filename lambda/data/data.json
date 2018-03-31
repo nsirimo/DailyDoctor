@@ -1,0 +1,349 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "daily doctor",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "logPain",
+                    "slots": [
+                        {
+                            "name": "bodyPart",
+                            "type": "bodyParts"
+                        },
+                        {
+                            "name": "deviation",
+                            "type": "deviations"
+                        }
+                    ],
+                    "samples": [
+                        "there is {deviation} in my {bodyPart}",
+                        "my {bodyPart} is {deviation}",
+                        "{deviation} in my {bodyPart}",
+                        "I'm feeling {deviation} in my {bodyPart}",
+                        "{bodyPart}",
+                        "my {bodyPart} hurts"
+                    ]
+                },
+                {
+                    "name": "painRating",
+                    "slots": [
+                        {
+                            "name": "rating",
+                            "type": "ratings"
+                        }
+                    ],
+                    "samples": [
+                        "a {rating}",
+                        "{rating} for pain",
+                        "{rating} for discomfort",
+                        "the discomfort is a {rating}",
+                        "the pain is a {rating}",
+                        "{rating}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "bodyParts",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "neck"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "rightthigh"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "leftthigh"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "thigh"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "thumb"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "fingers"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "upperback"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "lowerback"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "spine"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "shoulder"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "penis"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "head"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "heads"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "scalp"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "eye"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "righteye"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "lefteye"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "eyes"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "throat"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "liver"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "lung"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "knee"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "elbow"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "leg"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "rightleg"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "leftleg"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "rightarm"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "leftarm"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "chest"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "heart"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "deviations",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "bump"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bumpy"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "swelling"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "swollen"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sharpness"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sharp"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tingling"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "painful"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pain"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "numbness"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "numb"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "soreness"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sore"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ratings",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "5"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "4"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "3"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "2"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "five"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "four"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "three"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "two"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "one"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
