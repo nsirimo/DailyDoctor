@@ -12,13 +12,13 @@ const STOP_MESSAGE = 'Goodbye!';
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = APP_ID;
-    alexa.registerHandlers(newSessionHandler, startGameHandlers);
+    alexa.registerHandlers(newSessionHandler, startGameHandlers, askQuestionHandlers);
     alexa.execute();
 };
 var newSessionHandler = {
     LaunchRequest() {
         this.handler.state = "ASKMODE";
-        this.emit(":ask", "Welcome to Custom Alexa skill, are you ready to begin?");
+        this.emit(":ask", "Welcome to Daily Doctor, are you ready to begin?");
         
     }
 };
@@ -32,6 +32,19 @@ const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
         this.emit(":ask", 'does your penis hurt badly?');
     },
     "FinishIntent": function() {
-        this.emit(":tell", "All your answers are correct. Thanks for playing");
+        this.emit(":tell", "Thank you for logging your health, have a good day!");
     },
+});
+
+const askQuestionHandlers = Alexa.CreateStateHandler("ANSWERMODE", {
+    "AMAZON.YesIntent": function () {
+        this.handler.state = "ASKMODE";
+        
+        this.emitWithState("FinishIntent");
+    },
+    "AMAZON.NoIntent": function () {
+        this.handler.state = "ASKMODE";
+        
+        this.emitWithState("FinishIntent");
+    }
 });
