@@ -12,44 +12,26 @@ const STOP_MESSAGE = 'Goodbye!';
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = APP_ID;
-    alexa.registerHandlers(handlers);
+    alexa.registerHandlers(newSessionHandler, startGameHandlers);
     alexa.execute();
 };
-
-const handlers = {
-    'LaunchRequest': function () {
-        this.emit('logIntent');
-    },
-    'logIntent': function () {
-        var speechOutput = 'yo does your shit hurt?';
-  
-        this.emit(':tell', speechOutput);
-    },
-    'AMAZON.YesIntent': function () {
-        const speechOutput = 'yes mother fucker';
-
-        this.response.speak(speechOutput);
-        this.emit(':responseReady');
-    },
-    'AMAZON.NoIntent': function () {
-        const speechOutput = 'no you loser';
-
-        this.response.speak(speechOutput);
-        this.emit(':responseReady');
-    },
-    'AMAZON.HelpIntent': function () {
-        const speechOutput = HELP_MESSAGE;
-        const reprompt = HELP_REPROMPT;
-
-        this.response.speak(speechOutput).listen(reprompt);
-        this.emit(':responseReady');
-    },
-    'AMAZON.CancelIntent': function () {
-        this.response.speak(STOP_MESSAGE);
-        this.emit(':responseReady');
-    },
-    'AMAZON.StopIntent': function () {
-        this.response.speak(STOP_MESSAGE);
-        this.emit(':responseReady');
-    },
+var newSessionHandler = {
+    LaunchRequest() {
+        this.handler.state = "ASKMODE";
+        this.emit(":ask", "Welcome to Custom Alexa skill, are you ready to begin?");
+        
+    }
 };
+
+const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
+    "AMAZON.YesIntent": function () {
+        this.emitWithState("AskQuestionIntent");
+    },
+    "AskQuestionIntent": function() {
+        this.handler.state = "ANSWERMODE";
+        this.emit(":ask", 'does your penis hurt badly?');
+    },
+    "FinishIntent": function() {
+        this.emit(":tell", "All your answers are correct. Thanks for playing");
+    },
+});
