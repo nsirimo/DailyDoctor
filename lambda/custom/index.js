@@ -18,7 +18,7 @@ exports.handler = function(event, context, callback) {
 var newSessionHandler = {
     LaunchRequest() {
         this.handler.state = "ASKMODE";
-        this.emit(":ask", "Welcome to Daily Doctor, are you ready to begin?");
+        this.emit(":ask", "Welcome to Daily Doctor, are you feeling any pain or discomfort?");
         
     }
 };
@@ -26,6 +26,9 @@ var newSessionHandler = {
 const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
     "AMAZON.YesIntent": function () {
         this.emitWithState("AskQuestionIntent");
+    },
+    "AMAZON.NoIntent": function () {
+      this.emit(":tell", "Thank you for logging, healthy day has been recorded.");  
     },
     "AskQuestionIntent": function() {
         this.handler.state = "ANSWERMODE";
