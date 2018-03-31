@@ -12,7 +12,7 @@ const STOP_MESSAGE = 'Goodbye!';
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = APP_ID;
-    alexa.registerHandlers(newSessionHandler, startGameHandlers, askQuestionHandlers, redoHandler);
+    alexa.registerHandlers(newSessionHandler, startGameHandlers, askQuestionHandlers, customHandlers, redoHandler);
     alexa.execute();
 };
 var newSessionHandler = {
@@ -31,11 +31,11 @@ const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
       this.emit(":tell", "Thank you for logging, healthy day has been recorded.");  
     },
     "AskPain": function () {
-        this.handler.state = "ANSWERMODE";
+        this.handler.state = "CUSTOMANSWERMODE";
         this.emit(":ask", 'Please specify the area of discomfort or pain');
     },
     "AskRating": function () {
-      this.handler.state = "ANSWERMODE";
+      this.handler.state = "CUSTOMANSWERMODE";
       this.emit(":ask", 'Please specify your level of discomfort or pain from one to five, five being extreme pain and one being no pain.')
     },
     "AdditionalDetails": function () {
@@ -48,14 +48,6 @@ const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
 });
 
 const askQuestionHandlers = Alexa.CreateStateHandler("ANSWERMODE", {
-    "logPain": function () {
-        this.handler.state = "ASKMODE";
-        this.emitWithState("AskRating");
-    },
-    "painRating": function () {
-        this.handler.state = "ASKMODE";
-        this.emitWithState("AdditionalDetails");
-    },
     "AMAZON.YesIntent": function () {
         this.handler.state = "ASKMODE";
         
@@ -65,6 +57,17 @@ const askQuestionHandlers = Alexa.CreateStateHandler("ANSWERMODE", {
         this.handler.state = "ASKMODE";
         
         this.emitWithState("FinishIntent");
+    }
+});
+
+const customHandlers = Alexa.CreateStateHandler("CUSTOMANSWERMODE", {
+    "logPain": function () {
+        this.handler.state = "ASKMODE";
+        this.emitWithState("AskRating");
+    },
+    "painRating": function () {
+        this.handler.state = "ASKMODE";
+        this.emitWithState("AdditionalDetails");
     }
 });
 
