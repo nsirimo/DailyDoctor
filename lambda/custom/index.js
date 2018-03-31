@@ -12,7 +12,7 @@ const STOP_MESSAGE = 'Goodbye!';
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = APP_ID;
-    alexa.registerHandlers(newSessionHandler, startGameHandlers, askQuestionHandlers);
+    alexa.registerHandlers(newSessionHandler, startGameHandlers, askQuestionHandlers, redoHandler);
     alexa.execute();
 };
 var newSessionHandler = {
@@ -25,14 +25,22 @@ var newSessionHandler = {
 
 const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
     "AMAZON.YesIntent": function () {
-        this.emitWithState("AskQuestionIntent");
+        this.emitWithState("AskPain");
     },
     "AMAZON.NoIntent": function () {
       this.emit(":tell", "Thank you for logging, healthy day has been recorded.");  
     },
-    "AskQuestionIntent": function() {
+    "AskPain": function () {
         this.handler.state = "ANSWERMODE";
-        this.emit(":ask", 'does your penis hurt badly?');
+        this.emit(":ask", 'Please specify the area of discomfort or pain');
+    },
+    "AskRating": function () {
+      this.handler.state = "ANSWERMODE";
+      this.emit(":ask", 'Please specify your level of discomfort or pain from one to five, five being extreme pain and one being no pain.')
+    },
+    "AdditionalDetails": function () {
+        this.handler.state = "REDOMODE";
+        this.emit(":ask", 'Thank you, would you like to log any additional pain or discomfort?');
     },
     "FinishIntent": function() {
         this.emit(":tell", "Thank you for logging your health, have a good day!");
@@ -40,10 +48,32 @@ const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
 });
 
 const askQuestionHandlers = Alexa.CreateStateHandler("ANSWERMODE", {
+    "logPain": function () {
+        this.handler.state = "ASKMODE";
+        this.emitWithState("AskRating");
+    },
+    "painRating": function () {
+        this.handler.state = "ASKMODE";
+        this.emitWithState("AdditionalDetails");
+    },
     "AMAZON.YesIntent": function () {
         this.handler.state = "ASKMODE";
         
         this.emitWithState("FinishIntent");
+    },
+    "AMAZON.NoIntent": function () {
+        this.handler.state = "ASKMODE";
+        
+        this.emitWithState("FinishIntent");
+    }
+});
+
+
+const redoHandler = Alexa.CreateStateHandler("REDOMODE", {
+    "AMAZON.YesIntent": function () {
+        this.handler.state = "ASKMODE";
+        
+        this.emitWithState("AskPain");
     },
     "AMAZON.NoIntent": function () {
         this.handler.state = "ASKMODE";
