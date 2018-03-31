@@ -1,0 +1,19 @@
+{
+  "name": "dailydoctor",
+  "version": "0.0.0",
+  "description": "Daily Doctor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "alexa",
+    "skill",
+    "daily",
+    "doctor"
+  ],
+  "author": "Nicolas Sirimongkol",
+  "dependencies": {
+    "alexa-sdk": "^1.0.12"
+  }
+}
