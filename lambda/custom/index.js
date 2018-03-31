@@ -1,5 +1,14 @@
 'use strict';
 const Alexa = require('alexa-sdk');
+var AWS = require('aws-sdk');
+var print = require('./helpers').printPretty;
+AWS.config.update({region:'us-east-1'});
+AWS.config.update({
+    accessKeyId: "AKIAJJ7S3M23DBSECLGQ",
+    secretAccessKey: "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",
+    "region": "us-east-1"
+});
+var dynamodb = new AWS.DynamoDB();
 
 const APP_ID = undefined;
 
@@ -12,6 +21,31 @@ const STOP_MESSAGE = 'Goodbye!';
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = APP_ID;
+    var params = {
+        Item: {
+         "userId": {
+           S: "nicolassirimongkol",
+         },
+         "date": {
+             S: "2018-03-31T01:24:12Z"
+         },
+         "bodyPart": {
+            S:" penis"
+         },
+         "painRating": {
+             S: "2"
+         },
+         "additonalComments": {
+             S: "Sharp pain when farting."
+         }
+        }, 
+        ReturnConsumedCapacity: "TOTAL", 
+        TableName: "dailyDoctorLogs"
+       };
+       dynamodb.putItem(params, function(err, data) {
+         if (err) console.log(err, err.stack);
+         else     console.log(data);
+       });
     alexa.registerHandlers(newSessionHandler, startGameHandlers, askQuestionHandlers, customHandlers, redoHandler, finishHandler);
     alexa.execute();
 };
