@@ -96,7 +96,7 @@ const customHandlers = Alexa.CreateStateHandler("CUSTOMANSWERMODE", {
         this.handler.state = "ASKMODE";
         this.emitWithState("AskRating");
     },
-    "painRating": function () {
+    "ratePain": function () {
         this.handler.state = "ASKMODE";
         this.emitWithState("AdditionalDetails");
     }
