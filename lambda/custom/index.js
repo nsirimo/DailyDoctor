@@ -54,7 +54,7 @@ const startGameHandlers = Alexa.CreateStateHandler("ASKMODE", {
         this.emit(":ask", 'Please rate your discomfort on a scale from one to five, five being extreme pain and one being mild pain.')
     },
     "AdditionalDetails": function () {
-        var addDet = "I fart when I sneeze";
+        var addDet = " ";
         additionalComments = addDet;
         this.handler.state = "REDOMODE";
         this.emit(":ask", 'Thank you. Would you like to log any additional pain or discomfort?');
