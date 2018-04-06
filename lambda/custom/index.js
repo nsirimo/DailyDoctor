@@ -2,8 +2,8 @@
 const Alexa = require('alexa-sdk');
 var AWS = require('aws-sdk');
 AWS.config.update({
-    accessKeyId: "AKIAJJ7S3M23DBSECLGQ",
-    secretAccessKey: "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",
+    accessKeyId: 
+    secretAccessKey: 
     "region": "us-east-1"
 });
 var dynamodb = new AWS.DynamoDB.DocumentClient();
